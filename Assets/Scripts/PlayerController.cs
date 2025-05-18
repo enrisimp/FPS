@@ -13,9 +13,12 @@ public class PlayerController : MonoBehaviour
     public InputActionReference lookAction; // Referencia a la acción de mirar
     public InputActionReference jumpAction; // Referencia a la acción de saltar
     public InputActionReference SprintAction; // Referencia a la acción de correr
+    public InputActionReference shootAction; // Referencia a la acción de disparar
+    public InputActionReference reloadAction; // Referencia a la acción de recargar
     public Camera theCam; // Referencia a la cámara
     public WeaponsController weaponCon; // Referencia al controlador de armas
-    public InputActionReference shootAction; // Referencia a la acción de disparar
+
+
 
     public float moveSpeed = 5f; // Velocidad de movimiento
 
@@ -115,6 +118,12 @@ public class PlayerController : MonoBehaviour
         if (shootAction.action.IsPressed()) // Verificar si la acción de disparar está presionada
         {
             weaponCon.ShootHeld(); // Llamar al método ShootHeld del controlador de armas
+        }
+
+        // Recargar el arma
+        if (reloadAction.action.WasPressedThisFrame()) // Verificar si la acción de recargar fue presionada
+        {
+            weaponCon.Reload(); // Llamar al método Reload del controlador de armas
         }
     }
 
