@@ -318,6 +318,37 @@ Transform:
   - {fileID: 6100210256795305302}
   m_Father: {fileID: 6941203070378603488}
   m_LocalEulerAnglesHint: {x: -37.44186, y: -179.9987, z: -0.00048045788}
+--- !u!1 &1045098743964912566
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6546198905250124789}
+  m_Layer: 7
+  m_Name: Patrol Point (3)
+  m_TagString: Untagged
+  m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6546198905250124789
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1045098743964912566}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -19.68, y: 0, z: -0.52}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3488225578427596724}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1087153861673723307
 GameObject:
   m_ObjectHideFlags: 0
@@ -781,6 +812,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2660878436545869284}
+  - {fileID: 3488225578427596724}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: -185.69, z: 0}
 --- !u!136 &7246942358284819967
@@ -820,9 +852,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 5
   theRB: {fileID: 6001922820618518834}
+  anim: {fileID: 6006159290639715518}
   chaseRange: 15
   stopCloseRange: 4
-  anim: {fileID: 6006159290639715518}
+  patrolPoints:
+  - {fileID: 1731960433017901692}
+  - {fileID: 6361452476766245269}
+  - {fileID: 6023162783065686973}
+  - {fileID: 6546198905250124789}
+  pointsHolder: {fileID: 3488225578427596724}
+  pointWaitTime: 3
+  waitCounter: 0
+  currentHealth: 25
+  waitToDisappear: 4
 --- !u!54 &6001922820618518834
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -848,7 +890,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 16
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!1 &2650043173528977027
 GameObject:
@@ -1811,6 +1853,37 @@ Transform:
   - {fileID: 2801042910800126768}
   m_Father: {fileID: 5601007705589062828}
   m_LocalEulerAnglesHint: {x: -40.34413, y: -5.9656773, z: 31.696999}
+--- !u!1 &5609255499754226186
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1731960433017901692}
+  m_Layer: 7
+  m_Name: Patrol Point
+  m_TagString: Untagged
+  m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1731960433017901692
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5609255499754226186}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 6.76, y: 0, z: 3.64}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3488225578427596724}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5625750788671423150
 GameObject:
   m_ObjectHideFlags: 0
@@ -2431,6 +2504,41 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &6680653940323421807
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3488225578427596724}
+  m_Layer: 7
+  m_Name: Patrol Points
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3488225578427596724
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6680653940323421807}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1731960433017901692}
+  - {fileID: 6361452476766245269}
+  - {fileID: 6023162783065686973}
+  - {fileID: 6546198905250124789}
+  m_Father: {fileID: 359339460917073871}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6772085523032648957
 GameObject:
   m_ObjectHideFlags: 0
@@ -2899,6 +3007,37 @@ Transform:
   - {fileID: 2471727924542024156}
   m_Father: {fileID: 3979225642767246287}
   m_LocalEulerAnglesHint: {x: -84.627785, y: 88.61035, z: -125.158676}
+--- !u!1 &7666379880347909430
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6361452476766245269}
+  m_Layer: 7
+  m_Name: Patrol Point (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6361452476766245269
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7666379880347909430}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 12.1, y: 0, z: 15.11}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3488225578427596724}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7701306949437568680
 GameObject:
   m_ObjectHideFlags: 0
@@ -3184,6 +3323,37 @@ Transform:
   - {fileID: 5989567343419250604}
   m_Father: {fileID: 3787844739307884936}
   m_LocalEulerAnglesHint: {x: -40.344124, y: 5.9656706, z: -31.696999}
+--- !u!1 &8402835857775489561
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6023162783065686973}
+  m_Layer: 7
+  m_Name: Patrol Point (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6023162783065686973
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8402835857775489561}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -15.78, y: 0, z: 26.55}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3488225578427596724}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8447535779491709419
 GameObject:
   m_ObjectHideFlags: 0

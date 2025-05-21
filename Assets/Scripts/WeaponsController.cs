@@ -26,6 +26,8 @@ public class WeaponsController : MonoBehaviour
 
     public int pickupAmount; // Munición recogida al recoger un objeto de munición
 
+    public float damageAmount = 15f; // Daño realizado
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -67,6 +69,8 @@ public class WeaponsController : MonoBehaviour
                 if (hit.transform.tag == "Enemy") // Verificar si el objeto golpeado tiene la etiqueta "Enemy"
                 {
                     Instantiate(damageEffect, hit.point, Quaternion.identity); // Instanciar el efecto de daño en el punto de colisión
+
+                    hit.transform.GetComponent<EnemyController>().TakeDamage(damageAmount); // Llamar al método TakeDamage del enemigo golpeado
                 }
                 else
                 {
@@ -104,7 +108,7 @@ public class WeaponsController : MonoBehaviour
 
     public void Reload()
     {
-        Debug.Log("Reloading..."); // Imprimir "Reloading..." en la consola
+        // Debug.Log("Reloading..."); // Imprimir "Reloading..." en la consola
 
         remainingAmmo += currentAmmo; // Agregar la munición actual a la munición restante
 
