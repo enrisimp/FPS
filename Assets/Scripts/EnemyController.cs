@@ -16,14 +16,18 @@ public class EnemyController : MonoBehaviour
     // Patrullaje
     private float strafeAmount; // Cantidad de movimiento lateral aleatorio del enemigo
     public Transform[] patrolPoints; // Puntos de patrullaje del enemigo
-    private int currentPatrolPoint; // Índice del punto de patrullaje actual del enemigo
+    [HideInInspector] public int currentPatrolPoint; // Índice del punto de patrullaje actual del enemigo
     public Transform pointsHolder; // Objeto padre que contiene los puntos de patrullaje
     public float pointWaitTime = 3f; // Tiempo de espera en cada punto de patrullaje
-    public float waitCounter; // Contador de espera en cada punto de patrullaje
+    private float waitCounter; // Contador de espera en cada punto de patrullaje
 
+    
     // Daño
     private bool isDead; // Indica si el enemigo está muerto
     public float currentHealth = 25f; // Vida restante
+    public float startingHealth = 25f; // Vida inicial
+    
+    
     public float waitToDisappear = 4f; // Tiempo de espera para desaparecer después de morir
 
     // Balas
@@ -32,6 +36,11 @@ public class EnemyController : MonoBehaviour
     public float timeBetweenShots = 1f; // Tiempo entre disparos
     private float shotCounter; // Contador de disparos
     public float shotDamage; // Daño del proyectil
+
+    // Jefe Final
+    public bool splitOnDeath; // Indica si el enemigo se divide al morir
+    public float minSize = .4f; // Tamaño mínimo del enemigo
+    
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -45,8 +54,9 @@ public class EnemyController : MonoBehaviour
         waitCounter = Random.Range(.75f, 1.25f) * pointWaitTime; // Inicializar el contador de espera en un rango aleatorio entre 0.75 y 1.25 segundos
 
         shotCounter = timeBetweenShots; // Inicializar el contador de disparos
+        currentHealth = startingHealth; // Inicializar la vida restante al valor inicial
 
-        anim.SetTrigger("shooting"); // Iniciar la animación de disparo
+        // anim.SetTrigger("shooting"); // Iniciar la animación de disparo
     }
 
     // Update is called once per frame
@@ -64,7 +74,12 @@ public class EnemyController : MonoBehaviour
                 if(transform.localScale.x <= .1f) // Si la escala del enemigo es menor o igual a 0.1
                 {
                     Destroy(gameObject); // Destruir el objeto del enemigo
-                    Destroy(pointsHolder.gameObject); // Destruir el objeto padre que contiene los puntos de patrullaje
+
+                    if(splitOnDeath == false)
+                    {
+                        Destroy(pointsHolder.gameObject); // Destruir el objeto padre que contiene los puntos de patrullaje
+                    }
+                    
                 }
             }
             return; // Si el enemigo está muerto, no hacer nada y termina el update
@@ -99,6 +114,8 @@ public class EnemyController : MonoBehaviour
 
                 EnemyProjectile newProjectile = Instantiate(projectile, shootPoint.position, shootPoint.rotation); // Instanciar un nuevo proyectil en el punto de disparo
                 newProjectile.damageAmount = shotDamage; // Asignar el daño del proyectil
+
+                newProjectile.transform.localScale = transform.localScale;  // Asignar la escala del proyectil al enemigo
 
                 shotCounter = timeBetweenShots; // Reiniciar el contador de disparos
 
@@ -163,6 +180,26 @@ public class EnemyController : MonoBehaviour
 
         if (currentHealth <= 0)
         {
+            // Si es jefe final
+            if(splitOnDeath == true) // Si el enemigo se divide al morir
+            {
+                if(transform.localScale.x > minSize) // Si el tamaño del enemigo es menor o igual al tamaño mínimo
+                {
+                    startingHealth *= .75f; // Reducir la vida inicial al dividirse
+
+                    currentHealth = startingHealth; // Reiniciar la vida del enemigo
+
+                    shotDamage *= .75f; // Reducir el daño del proyectil al dividirse
+                    moveSpeed *= .75f; // Reducir la velocidad de movimiento al dividirse
+
+                    GameObject clone1 = Instantiate(gameObject, transform.position + (transform.right * .5f * transform.localScale.x), Quaternion.identity); // Instanciar un nuevo enemigo en la posición del enemigo actual
+                    GameObject clone2 = Instantiate(gameObject, transform.position + (-transform.right * .5f * transform.localScale.x), Quaternion.identity); // Instanciar otro nuevo enemigo en la posición del enemigo actual
+
+                    clone1.transform.localScale = transform.localScale * .75f; // Reducir la escala del primer clon
+                    clone2.transform.localScale = transform.localScale * .75f; // Reducir la escala del segundo clon
+                }
+                
+            }
             anim.SetTrigger("die"); // inicia animación de muerte
 
             isDead = true; // Marcar al enemigo como muerto

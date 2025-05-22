@@ -532,6 +532,37 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &1530736559073958805
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3396846749522734592}
+  m_Layer: 0
+  m_Name: Shoot point
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3396846749522734592
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1530736559073958805}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.0426, y: 0, z: 0.0024}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5719097695479185444}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1552048170969378460
 GameObject:
   m_ObjectHideFlags: 0
@@ -835,9 +866,9 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5168613
-  m_Height: 2.030526
+  m_Height: 2.0472856
   m_Direction: 1
-  m_Center: {x: 0.016860783, y: 1.328679, z: 0.10119897}
+  m_Center: {x: 0.016860783, y: 1.3202991, z: 0.10119897}
 --- !u!114 &3232382811974582577
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -865,6 +896,10 @@ MonoBehaviour:
   waitCounter: 0
   currentHealth: 25
   waitToDisappear: 4
+  shootPoint: {fileID: 3396846749522734592}
+  projectile: {fileID: 4477536826135377716, guid: d4dbc0280917a2b4ca5ae4781280e516, type: 3}
+  timeBetweenShots: 0.5
+  shotDamage: 10
 --- !u!54 &6001922820618518834
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1262,7 +1297,8 @@ Transform:
   m_LocalPosition: {x: 0.00017482847, y: 0.0020411897, z: -0.00056346355}
   m_LocalScale: {x: 0.23807876, y: 0.23807882, z: 0.2380788}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 3396846749522734592}
   m_Father: {fileID: 9129711145469597631}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &2672922804189062735
