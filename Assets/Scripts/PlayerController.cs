@@ -24,6 +24,7 @@ public class PlayerController : MonoBehaviour
     public InputActionReference reloadAction; // Referencia a la acción de recargar
     public Camera theCam; // Referencia a la cámara
     public WeaponsController weaponCon; // Referencia al controlador de armas
+    public InputActionReference nextWeapon, prevWeapon; // Referencias a las acciones de cambiar de arma
 
 
 
@@ -39,6 +40,8 @@ public class PlayerController : MonoBehaviour
     public float camZoomNormal, camZoomOut, camZoomSpeed; // Zoom normal y zoom out de la cámara al correr 60 y 75 y velocidad de zoom 5f
 
     public bool isDead; // Indica si el jugador está muerto
+
+
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -139,6 +142,17 @@ public class PlayerController : MonoBehaviour
         if (reloadAction.action.WasPressedThisFrame()) // Verificar si la acción de recargar fue presionada
         {
             weaponCon.Reload(); // Llamar al método Reload del controlador de armas
+        }
+        
+        // Cambiar de arma
+        if(nextWeapon.action.WasPressedThisFrame()) // Verificar si la acción de cambiar a la siguiente arma fue presionada
+        {
+            weaponCon.NextWeapon(); // Llamar al método NextWeapon del controlador de armas
+        }
+
+        if(prevWeapon.action.WasPressedThisFrame()) // Verificar si la acción de cambiar a la arma anterior fue presionada
+        {
+            weaponCon.PreviousWeapon(); // Llamar al método PrevWeapon del controlador de armas
         }
     }
 

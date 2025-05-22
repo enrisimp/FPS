@@ -28,11 +28,17 @@ public class WeaponsController : MonoBehaviour
 
     public float damageAmount = 15f; // Daño realizado
 
+    public Weapon[] weapons; // Armas disponibles
+    private int currentWeapon, previousWeapon; // Índice del arma actual
+
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         UICon = FindFirstObjectByType<UIController>(); // Obtener el controlador de la interfaz de usuario
+
+        SetWeapon(currentWeapon); // Llamar al método para establecer el arma actual
 
         Reload(); // Llamar al método de recarga para inicializar la munición
 
@@ -134,5 +140,62 @@ public class WeaponsController : MonoBehaviour
 
         UICon.UpdateAmmoText(currentAmmo, remainingAmmo); // Actualizar el texto de munición en la interfaz de usuario
 
+    }
+
+    public void SetWeapon(int weaponToSet)
+    {
+        if(previousWeapon != currentWeapon) // Verificar si el arma anterior es diferente del arma actual
+        {
+            weapons[previousWeapon].currentAmmo = currentAmmo; // Guardar la munición actual del arma anterior
+            weapons[previousWeapon].remainingAmmo = remainingAmmo; // Guardar la munición restante del arma anterior
+        }
+        
+
+        range = weapons[weaponToSet].range; // Establecer el rango del arma actual
+        flareDisplayTime = weapons[weaponToSet].flareDisplayTime; // Establecer el tiempo de visualización del destello
+        canAutoFire = weapons[weaponToSet].canAutoFire; // Establecer si el arma puede disparar automáticamente
+        timeBetweenShots = weapons[weaponToSet].timeBetweenShots; // Establecer el tiempo entre disparos automáticos
+        currentAmmo = weapons[weaponToSet].currentAmmo; // Establecer la munición actual
+        clipSize = weapons[weaponToSet].clipSize; // Establecer el tamaño del cargador
+        remainingAmmo = weapons[weaponToSet].remainingAmmo; // Establecer la munición restante
+        pickupAmount = weapons[weaponToSet].pickupAmount; // Establecer la cantidad de munición recogida al recoger un objeto de munición
+        damageAmount = weapons[weaponToSet].damageAmount; // Establecer el daño realizado
+
+        muzzleFlare = weapons[weaponToSet].muzzleFlare; // Establecer el prefab del destello de boca de fuego
+
+        // Desactivar todas las armas excepto la seleccionada
+        foreach (Weapon w in weapons) // Recorrer todas las armas
+        {
+            w.gameObject.SetActive(false); // Desactivar todas las armas
+        }
+
+        weapons[weaponToSet].gameObject.SetActive(true); // Activar el arma seleccionada
+
+        UICon.UpdateAmmoText(currentAmmo, remainingAmmo); // Actualizar el texto de munición en la interfaz de usuario
+
+        previousWeapon = currentWeapon; // Guardar el índice del arma anterior
+    }
+
+    public void NextWeapon()
+    {
+        currentWeapon++; // Incrementar el índice del arma actual
+        if (currentWeapon >= weapons.Length) // Verificar si el índice del arma actual es mayor o igual al número de armas
+        {
+            currentWeapon = 0; // Reiniciar el índice del arma actual a cero
+        }
+
+        SetWeapon(currentWeapon); // Llamar al método para establecer el arma actual
+    }
+
+    public void PreviousWeapon()
+    {
+        currentWeapon--; // Decrementar el índice del arma actual
+
+        if (currentWeapon < 0) // Verificar si el índice del arma actual es menor que cero
+        {
+            currentWeapon = weapons.Length - 1; // Establecer el índice del arma actual al último índice de armas
+        }
+
+        SetWeapon(currentWeapon); // Llamar al método para establecer el arma actual
     }
 }
