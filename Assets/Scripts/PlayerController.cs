@@ -4,6 +4,13 @@ using UnityEngine.Rendering;
 
 public class PlayerController : MonoBehaviour
 {
+    // Singleton estático para asegurar que solo haya una instancia de PlayerController
+    public static PlayerController instance; // Instancia estática de PlayerController
+    private void Awake()
+    {
+        instance = this; // Asignar la instancia si no existe
+    }
+
     // Referencia al componente Character Controller
     private CharacterController charCon; // Componente Character Controller
     private Vector3 currentMovement; // Movimiento actual del personaje
@@ -31,6 +38,8 @@ public class PlayerController : MonoBehaviour
     public float runSpeed = 10f; // Velocidad de carrera
     public float camZoomNormal, camZoomOut, camZoomSpeed; // Zoom normal y zoom out de la cámara al correr 60 y 75 y velocidad de zoom 5f
 
+    public bool isDead; // Indica si el jugador está muerto
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -43,6 +52,12 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(isDead == true) // Verificar si el jugador está muerto
+        {
+            return; // Salir del método si el jugador está muerto
+        }
+        
+        // Capturar el movimiento del personaje
         float yStore = currentMovement.y; // Almacenar el valor de Y del movimiento actual
 
         Vector2 moveInput = moveAction.action.ReadValue<Vector2>(); // Leer el valor de entrada de movimiento

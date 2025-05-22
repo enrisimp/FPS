@@ -29,9 +29,11 @@ public class EnemyProjectile : MonoBehaviour
     {
         if(other.tag == "Player") // Si el objeto colisionado tiene la etiqueta "Player"
         {
+            //Debug.Log("Damaging Player for " + damageAmount); // Imprimir en la consola que el proyectil ha golpeado al jugador
+
             Instantiate(damageEffect, other.transform.position, Quaternion.identity); // Instanciar el efecto de daño en la posición del jugador
 
-            Debug.Log("Damaging Player for " + damageAmount); // Imprimir en la consola que el proyectil ha golpeado al jugador
+            PlayerHealthController.instance.TakeDamage(damageAmount); // Llamar al método TakeDamage del controlador de salud del jugador para reducir su salud
         }
         else
         {

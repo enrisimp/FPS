@@ -73,7 +73,7 @@ public class EnemyController : MonoBehaviour
 
         float distance = Vector3.Distance(transform.position, player.transform.position); // Calcular la distancia entre el enemigo y el jugador
 
-        if (distance < chaseRange) // Si el jugador está dentro del rango de persecución
+        if (distance < chaseRange && PlayerController.instance.isDead == false) // Si el jugador está dentro del rango de persecución y el jugador no esa muerto
         {
             //transform.LookAt(player.transform.position);
             transform.LookAt(new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z)); // Mirar al jugador en el eje Y
