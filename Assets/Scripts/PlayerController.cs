@@ -59,6 +59,12 @@ public class PlayerController : MonoBehaviour
         {
             return; // Salir del método si el jugador está muerto
         }
+
+        // 
+        if(Time.timeScale == 0) // Verificar si el tiempo está pausado
+        {
+            return; // Salir del método si el tiempo está pausado
+        }
         
         // Capturar el movimiento del personaje
         float yStore = currentMovement.y; // Almacenar el valor de Y del movimiento actual

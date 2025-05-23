@@ -1307,6 +1307,8 @@ MonoBehaviour:
   - {fileID: 1297796911}
   ammoPickup: {fileID: 8692428738967053760, guid: 52015d58fe089f44fb0330e0b689a496, type: 3}
   ammoSpawnTime: 5
+  checkInterval: 0
+  levelExit: {fileID: 977455159}
 --- !u!4 &600830039
 Transform:
   m_ObjectHideFlags: 0
@@ -1924,6 +1926,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1490323831}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &977455159 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2449371787398725322, guid: d32b928d562e67744b09dda645ea7ef4, type: 3}
+  m_PrefabInstance: {fileID: 1198838717}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &998940835 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 16ff5f05ff94311469e5ad89dbaf8abe, type: 3}
