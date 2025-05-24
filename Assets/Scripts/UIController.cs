@@ -90,6 +90,7 @@ public class UIController : MonoBehaviour
             pauseScreen.SetActive(true); // Activar la pantalla de pausa
             Time.timeScale = 0; // Pausar el tiempo del juego
             Cursor.lockState = CursorLockMode.None; // Desbloquear el cursor
+            Cursor.visible = true; // Hacer visible el cursor
         }
         else
         {
