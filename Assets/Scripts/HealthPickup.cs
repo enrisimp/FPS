@@ -11,6 +11,8 @@ public class HealthPickup : MonoBehaviour
             PlayerHealthController.instance.Heal(healthAmount); // Llamar al método Heal() en PlayerHealthController
 
             Destroy(gameObject); // Destruir el objeto de recogida de salud
+
+            AudioManager.instance.PlaySFX(5); // Reproducir el efecto de sonido de recogida de salud
         }
     }
 }

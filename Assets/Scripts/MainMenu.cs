@@ -5,10 +5,17 @@ public class MainMenu : MonoBehaviour
 {
     public string firstLevel; // Nombre de la escena del primer nivel
 
+    private void Start()
+    {
+        AudioManager.instance.PlayTitleMusic(); // Reproducir la música del título al iniciar el menú
+    }
     public void StartGame()
     {
         // Cargar la escena del juego
         UnityEngine.SceneManagement.SceneManager.LoadScene(firstLevel);
+
+        // Reproducir la música del nivel
+        AudioManager.instance.PlayLevelMusic();
     }
 
     public void QuitGame()

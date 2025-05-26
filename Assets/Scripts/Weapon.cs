@@ -18,4 +18,6 @@ public class Weapon : MonoBehaviour
     public int pickupAmount; // Munición recogida al recoger un objeto de munición
 
     public float damageAmount = 15f; // Daño realizado
+
+    public int sfxIndex; // Índice del efecto de sonido del disparo
 }

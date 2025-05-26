@@ -35,6 +35,11 @@ public class PlayerHealthController : MonoBehaviour
             PlayerController.instance.isDead = true; // Marcar al jugador como muerto
 
             UIController.instance.ShowDeathScreen(); // Llamar al método para mostrar la pantalla de muerte
+
+            AudioManager.instance.PlaySFX(6); // Reproducir el efecto de sonido de muerte del jugador
+        } else
+        {
+            AudioManager.instance.PlaySFX(7); // Reproducir el efecto de sonido de daño al jugador
         }
 
         UIController.instance.UpdateHealthText(currentHealth); // Actualizar el texto de salud en la interfaz de usuario

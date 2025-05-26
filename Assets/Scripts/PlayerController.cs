@@ -108,6 +108,8 @@ public class PlayerController : MonoBehaviour
         if(jumpAction.action.WasPressedThisFrame() && charCon.isGrounded == true)
         {
             currentMovement.y = jumpPower; // Aplicar la potencia de salto al movimiento actual
+
+            AudioManager.instance.PlaySFX(8); // Reproducir el efecto de sonido de salto
         }
 
         // Aplicar el movimiento al CharacterController

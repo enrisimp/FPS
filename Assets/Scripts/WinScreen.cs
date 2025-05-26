@@ -9,6 +9,8 @@ public class WinScreen : MonoBehaviour
     void Start()
     {
         Cursor.lockState = CursorLockMode.None; // Lock the cursor to the center of the screen
+
+        AudioManager.instance.PlayWinMusic(); // Reproducir la música de victoria al iniciar la pantalla de victoria
     }
 
     public void GoToMainMenu()

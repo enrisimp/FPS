@@ -31,6 +31,9 @@ public class WeaponsController : MonoBehaviour
     public Weapon[] weapons; // Armas disponibles
     private int currentWeapon, previousWeapon; // Índice del arma actual
 
+    //Sonido
+    private int sfxIndex; // Índice del efecto de sonido del disparo
+
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -77,10 +80,14 @@ public class WeaponsController : MonoBehaviour
                     Instantiate(damageEffect, hit.point, Quaternion.identity); // Instanciar el efecto de daño en el punto de colisión
 
                     hit.transform.GetComponent<EnemyController>().TakeDamage(damageAmount); // Llamar al método TakeDamage del enemigo golpeado
+
+                    AudioManager.instance.PlaySFX(0); // Reproducir el efecto de sonido impacto enemigo 
                 }
                 else
                 {
                     Instantiate(impactEffect, hit.point, Quaternion.identity); // Instanciar el efecto de impacto en el punto de colisión
+
+                    AudioManager.instance.PlaySFX(1); // Reproducir el efecto de sonido de impacto
                 }
 
             }
@@ -93,6 +100,8 @@ public class WeaponsController : MonoBehaviour
             currentAmmo--; // Reducir la munición actual
 
             UICon.UpdateAmmoText(currentAmmo, remainingAmmo); // Actualizar el texto de munición en la interfaz de usuario
+
+            AudioManager.instance.PlaySFX(sfxIndex); // Reproducir el efecto de sonido del disparo
         }
 
     }
@@ -162,6 +171,8 @@ public class WeaponsController : MonoBehaviour
         damageAmount = weapons[weaponToSet].damageAmount; // Establecer el daño realizado
 
         muzzleFlare = weapons[weaponToSet].muzzleFlare; // Establecer el prefab del destello de boca de fuego
+
+        sfxIndex = weapons[weaponToSet].sfxIndex; // Establecer el índice del efecto de sonido del disparo
 
         // Desactivar todas las armas excepto la seleccionada
         foreach (Weapon w in weapons) // Recorrer todas las armas

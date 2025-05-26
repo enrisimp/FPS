@@ -18,6 +18,9 @@ public class BossController : MonoBehaviour
     void Start()
     {
         ammoCounter = ammoSpawnTime; // Inicializa el contador de municiones
+        checkCounter = checkInterval; // Inicializa el contador de verificación
+
+        AudioManager.instance.PlayBossMusic(); // Reproducir la música del jefe al iniciar
     }
 
     // Update is called once per frame
@@ -43,6 +46,8 @@ public class BossController : MonoBehaviour
                 // Aquí puedes agregar la lógica para manejar la derrota del jefe
                 gameObject.SetActive(false); // Desactiva el objeto del jefe
                 levelExit.SetActive(true); // Activa el objeto de salida del nivel
+
+                AudioManager.instance.PlayLevelMusic(); // Reproducir la música del nivel al derrotar al jefe
             }
                 
         }

@@ -120,6 +120,8 @@ public class EnemyController : MonoBehaviour
                 shotCounter = timeBetweenShots; // Reiniciar el contador de disparos
 
                 anim.SetTrigger("shooting"); // Iniciar la animación de disparo
+
+                AudioManager.instance.PlaySFX(2); // Reproducir el efecto de sonido de disparo
  
             }
 
